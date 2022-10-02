@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        var div = document.querySelector('#app');
+        var viewModel = {};
+
+        // Object.defineProperty('target object', 'target property', {
+        //     'define contents'
+        // })
+
+        Object.defineProperty(viewModel, 'str', {
+            // property 접근 시 동작
+            get: function() {
+                console.log('get()');
+            },
+            // property 값 할당 시 동작
+            set: function(newVal) {
+                console.log('set()', newVal);
+                div.innerHTML = newVal; // view의 원리 : 값이 바뀔 때마다 
+            }
+        })
+
+        /*  vue.js 동작 원리
+            * 즉시실행함수 -> init() -> render() -> 
+        */
+
+        (function() {
+
+            function init() {
+                Object.defineProperty(viewModel, 'str', {
+                    get: function () {
+                        console.log('get()')
+                    },
+                    set: function(newVal) {
+                        console.log('set');
+                        render(newVal);
+                    }
+                })
+            }
+
+
+        })
+
+    </script>
+
+</body>
+</html>
