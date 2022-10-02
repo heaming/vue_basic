@@ -12,6 +12,11 @@
         <app-content></app-content>
         <app-footer></app-footer>
     </div>
+
+    <div id="app2">
+        <app-header></app-header>
+<!--        <app-footer></app-footer> 지역 컴포넌트는 인식 불가-->
+    </div>
     
     
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -19,10 +24,10 @@
     // 전역 컴포넌트
     // Vue.component('compoTag', contents);
     Vue.component('app-header',{
-        template: '<h1>Header</h1>'
+        template: '<h1>NavigationBar</h1>'
     });
     Vue.component('app-content', {
-        template: '<div>Content</div>',
+        template: '<div>LoginForm</div>',
     })
     
 
@@ -31,7 +36,7 @@
         // 지역 컴포넌트
         components: {
             'app-footer': {
-                template: '<footer>footer</footer>'
+                template: '<footer>ComponyInfo</footer>'
             }
         }
     //     template: '',
@@ -41,6 +46,10 @@
     //     methods: '',
     //     created: '',
     //     watch: '',
+    })
+
+    new Vue({
+        el : '#app2',
     })
 
     

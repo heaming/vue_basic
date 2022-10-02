@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--
+    - 자식1 compo -> (event) -> 자식2 compo : event emit
+-->
+<div id="app">
+    <!--    <app-header v-on:하위 compo에서 발생한 event name="상위 compo의 method 이름"></app-header>-->
+    <app-header v-bind:propsdata="num"></app-header>
+    <app-content v-on:pass="deliverNum" v-bind:propsdata="num"></app-content>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<script>
+    var appHeader = {
+        template: '<div><div>data from appContent : {{ propsdata }}</div></div>',
+        props: ['propsdata']
+    }
+
+    var appContent = {
+        template: '<div>content : <button v-on:click="passNum">add</button><div>{{ propsdata }}</div></div>',
+        methods: {
+            passNum: function() {
+                this.$emit('pass', 10);
+            }
+        },
+        props: ['propsdata'],
+    }
+
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            'app-header' : appHeader,
+            'app-content' : appContent,
+        },
+        methods: {
+            deliverNum: function(value) {
+                this.num = value;
+            }
+        },
+        data: {
+            num: 0,
+        }
+    })
+
+</script>
+</body>
+</html>
